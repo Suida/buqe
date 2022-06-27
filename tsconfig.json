@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "jsx": "preserve",
+        "module": "ESNext",
+        "target": "ES2015",
+        "lib": [
+            "ESNext",
+            "DOM"
+        ],
+        "moduleResolution": "Node",
+        "esModuleInterop": true,
+        "noEmit": true
+    }
+}

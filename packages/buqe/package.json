@@ -1,0 +1,23 @@
+{
+  "name": "buqe",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "cross-env BUQE_MODE=production pnpm webpack",
+    "dev": "cross-env BUQE_MODE=dev pnpm webpack serve"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.14",
+    "@types/react-dom": "^18.0.5",
+    "html-webpack-plugin": "^5.5.0",
+    "webpack-dev-server": "^4.9.2"
+  }
+}
