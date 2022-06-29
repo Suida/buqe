@@ -6,7 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 import * as pathConfig from './webpack.paths';
 
-const mode = process.env.BUQE_MODE === 'production'? 'production': 'development';
+const mode = process.env.BUQE_MODE === 'production' ? 'production' : 'development';
 
 const webpackConfig: Configuration = {
   mode,
@@ -21,17 +21,16 @@ const webpackConfig: Configuration = {
         loader: 'esbuild-loader',
         options: {
           loader: 'tsx',
-          tsconfigRaw: require('../../../tsconfig.json'),
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
-  optimization: { 
+  optimization: {
     minimizer: [
       new ESBuildMinifyPlugin({
         target: 'es2015',
       }),
-    ]
+    ],
   },
   plugins: [
     new ProvidePlugin({
@@ -43,14 +42,14 @@ const webpackConfig: Configuration = {
     }),
   ],
   resolve: {
-    extensions: ['.ts', '.tsx', '...'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.sass', '.json'],
     alias: {
       '@': pathConfig.srcPath,
-      "@config": pathConfig.configPath,
-      "@main": pathConfig.mainPath,
-      "@renderer": pathConfig.rendererPath
-    }
+      '@config': pathConfig.configPath,
+      '@main': pathConfig.mainPath,
+      '@renderer': pathConfig.rendererPath,
+    },
   },
-}
+};
 
 export default webpackConfig;

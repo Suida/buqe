@@ -10,6 +10,7 @@
     "build:main": "cross-env BUQE_MODE=production TS_NODE_TRANSPILE_ONLY=true pnpm webpack --config config/webpack.config.main.ts",
     "build:renderer": "cross-env BUQE_MODE=production TS_NODE_TRANSPILE_ONLY=true pnpm webpack --config config/webpack.config.renderer.ts",
     "dev": "cross-env BUQE_MODE=dev pnpm webpack serve",
+    "lint": "cross-env NODE_ENV=development eslint . --ext .js,.jsx,.ts,.tsx",
     "clean": "rimraf dist"
   },
   "keywords": [],
