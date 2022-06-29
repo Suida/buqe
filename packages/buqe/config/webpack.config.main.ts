@@ -6,8 +6,8 @@ import * as pathConfig from './webpack.paths';
 
 const mainConfig: Configuration =  merge(baseConfig, {
   entry: {
-    main: path.join(pathConfig.srcPath, 'main.ts'),
-    preload: path.join(pathConfig.srcPath, 'preload.ts'),
+    main: path.join(pathConfig.mainPath, 'main'),
+    preload: path.join(pathConfig.mainPath, 'preload'),
   },
   target: 'electron-main',
 })

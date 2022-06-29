@@ -7,7 +7,7 @@ import * as pathConfig from './webpack.paths';
 
 const mixinConfig: Configuration = {
   entry: {
-    renderer: path.join(pathConfig.srcPath, 'renderer.tsx'),
+    renderer: path.join(pathConfig.rendererPath, 'index'),
   },
   target: 'electron-renderer',
   devServer: {

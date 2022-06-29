@@ -4,16 +4,15 @@ import { ESBuildMinifyPlugin } from 'esbuild-loader';
 import { Configuration, ProvidePlugin } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-import { rootPath, outputPath } from './webpack.paths';
+import * as pathConfig from './webpack.paths';
 
 const mode = process.env.BUQE_MODE === 'production'? 'production': 'development';
-const publicPath = path.join(rootPath, 'public');
 
 const webpackConfig: Configuration = {
   mode,
   output: {
     filename: '[name].js',
-    path: outputPath,
+    path: pathConfig.outputPath,
   },
   module: {
     rules: [
@@ -40,11 +39,17 @@ const webpackConfig: Configuration = {
     }),
     new HtmlWebpackPlugin({
       title: 'buqe',
-      template: path.join(publicPath, 'index.html'),
+      template: path.join(pathConfig.rendererPath, 'index.ejs'),
     }),
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '...'],
+    alias: {
+      '@': pathConfig.srcPath,
+      "@config": pathConfig.configPath,
+      "@main": pathConfig.mainPath,
+      "@renderer": pathConfig.rendererPath
+    }
   },
 }
 
