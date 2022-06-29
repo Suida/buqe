@@ -2,10 +2,15 @@
   "name": "buqe",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "./dist/main.js",
   "scripts": {
-    "build": "cross-env BUQE_MODE=production pnpm webpack",
-    "dev": "cross-env BUQE_MODE=dev pnpm webpack serve"
+    "start": "pnpm build && electron .",
+    "package": "pnpm build && electron-builder build",
+    "build": "pnpm clean && concurrently \"pnpm build:main\" \"pnpm build:renderer\"",
+    "build:main": "cross-env BUQE_MODE=production TS_NODE_TRANSPILE_ONLY=true pnpm webpack --config config/webpack.config.main.ts",
+    "build:renderer": "cross-env BUQE_MODE=production TS_NODE_TRANSPILE_ONLY=true pnpm webpack --config config/webpack.config.renderer.ts",
+    "dev": "cross-env BUQE_MODE=dev pnpm webpack serve",
+    "clean": "rimraf dist"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +22,18 @@
   "devDependencies": {
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "electron": "^19.0.6",
+    "electron-builder": "^23.1.0",
     "html-webpack-plugin": "^5.5.0",
     "webpack-dev-server": "^4.9.2"
+  },
+  "build": {
+    "appId": "com.electron.buqe",
+    "files": [
+      "dist/index.html",
+      "dist/main.js",
+      "dist/preload.js",
+      "dist/renderer.js"
+    ]
   }
 }

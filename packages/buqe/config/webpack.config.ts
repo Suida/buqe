@@ -1,18 +1,19 @@
-const path = require('path');
+import path from 'path';
 
-const { ESBuildMinifyPlugin } = require('esbuild-loader');
-const { ProvidePlugin } = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+import { ESBuildMinifyPlugin } from 'esbuild-loader';
+import { Configuration, ProvidePlugin } from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
+import { rootPath, outputPath } from './webpack.paths';
 
 const mode = process.env.BUQE_MODE === 'production'? 'production': 'development';
-const publicPath = path.join(__dirname, 'public');
+const publicPath = path.join(rootPath, 'public');
 
-module.exports = {
+const webpackConfig: Configuration = {
   mode,
-  entry: './index.tsx',
   output: {
-    filename: 'index.js',
-    path: path.join(__dirname, 'dist'),
+    filename: '[name].js',
+    path: outputPath,
   },
   module: {
     rules: [
@@ -21,7 +22,7 @@ module.exports = {
         loader: 'esbuild-loader',
         options: {
           loader: 'tsx',
-          tsconfigRaw: require('../../tsconfig.json'),
+          tsconfigRaw: require('../../../tsconfig.json'),
         }
       }
     ]
@@ -42,8 +43,9 @@ module.exports = {
       template: path.join(publicPath, 'index.html'),
     }),
   ],
-  devServer: {
-    compress: true,
-    port: 9000,
+  resolve: {
+    extensions: ['.ts', '.tsx', '...'],
   },
 }
+
+export default webpackConfig;

@@ -2,12 +2,13 @@
     "compilerOptions": {
         "strict": true,
         "jsx": "preserve",
-        "module": "ESNext",
+        "module": "CommonJS",
         "target": "ES2015",
         "lib": [
             "ESNext",
             "DOM"
         ],
+        "allowJs": true,
         "moduleResolution": "Node",
         "esModuleInterop": true,
         "noEmit": true
