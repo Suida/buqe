@@ -5,8 +5,8 @@ import { resolveHtmlURL } from '@main/utils';
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
-    height: 600,
-    width: 800,
+    width: 1024,
+    height: 768,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },

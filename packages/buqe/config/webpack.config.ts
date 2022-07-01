@@ -1,12 +1,14 @@
-import path from 'path';
-
 import { ESBuildMinifyPlugin } from 'esbuild-loader';
-import { Configuration, ProvidePlugin } from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
+import {
+  Configuration,
+} from 'webpack';
 
 import * as pathConfig from './webpack.paths';
 
-const mode = process.env.BUQE_MODE === 'production' ? 'production' : 'development';
+export const isProd = process.env.BUQE_MODE === 'production';
+export const isDev = !isProd;
+
+export const mode = isProd ? 'production' : 'development';
 
 const webpackConfig: Configuration = {
   mode,
@@ -32,15 +34,6 @@ const webpackConfig: Configuration = {
       }),
     ],
   },
-  plugins: [
-    new ProvidePlugin({
-      React: 'react',
-    }),
-    new HtmlWebpackPlugin({
-      title: 'buqe',
-      template: path.join(pathConfig.rendererPath, 'index.ejs'),
-    }),
-  ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.css', '.sass', '.json'],
     alias: {

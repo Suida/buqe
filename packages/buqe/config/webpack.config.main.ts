@@ -1,7 +1,8 @@
 import path from 'path';
-import { Configuration } from 'webpack';
+import { Configuration, EnvironmentPlugin } from 'webpack';
 import { merge } from 'webpack-merge';
-import baseConfig from './webpack.config';
+import baseConfig, { mode } from './webpack.config';
+import { port } from './webpack.config.renderer';
 import * as pathConfig from './webpack.paths';
 
 const mainConfig: Configuration = merge(baseConfig, {
@@ -10,6 +11,12 @@ const mainConfig: Configuration = merge(baseConfig, {
     preload: path.join(pathConfig.mainPath, 'preload'),
   },
   target: 'electron-main',
+  plugins: [
+    new EnvironmentPlugin({
+      BUQE_MODE: mode,
+      BUQE_PORT: port,
+    }),
+  ],
 });
 
 export default mainConfig;
